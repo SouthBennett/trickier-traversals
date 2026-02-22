@@ -127,7 +127,22 @@ public class Traversals {
    */
   public static boolean hasStrictlyIncreasingPath(TreeNode<Integer> node) {
     if (node == null) return false;
-    return false;
+
+    int previous = Integer.MIN_VALUE;
+
+    findIncreasingPath(node, previous);
+
+    return hasStrictlyIncreasingPath(node.left) || hasStrictlyIncreasingPath(node.right);
+  }
+
+  private static boolean findIncreasingPath(TreeNode<Integer> node, int previous) {
+    if (node.value <= previous) return false;
+
+    if (node.left != null && node.right != null) {
+      return false;
+    }
+
+    return hasStrictlyIncreasingPath(node.left) || hasStrictlyIncreasingPath(node.right);
   }
 
   // OPTIONAL CHALLENGE

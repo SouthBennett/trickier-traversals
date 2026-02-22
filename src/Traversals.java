@@ -102,13 +102,19 @@ public class Traversals {
     if (node == null) return 0;
 
     Set<Integer> set = new HashSet<>();
-    
-    set.add(node.value);
 
-    countDistinctValues(node.left);
-    countDistinctValues(node.right);
+    collectDistinct(node, set);
 
     return set.size();
+  }
+
+  private static void collectDistinct(TreeNode<Integer> node, Set<Integer> set) {
+    if (node == null) return;
+
+    set.add(node.value);
+
+    collectDistinct(node.left, set);
+    collectDistinct(node.right, set);
   }
 
   /**
